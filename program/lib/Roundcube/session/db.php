@@ -202,8 +202,7 @@ class rcube_session_db extends rcube_session
         $this->db->query('DELETE FROM ' . $this->db->table_name('session')
             . ' WHERE `expires_at` < ' . $this->db->now());
 
-        $this->log('Session GC (DB): remove records < '
-            . date('Y-m-d H:i:s', $this->db->now())
-            . '; rows = ' . intval($this->db->affected_rows()));
+        $this->log('Session GC (DB): removed expired records; rows = '
+            . intval($this->db->affected_rows()));
     }
 }
