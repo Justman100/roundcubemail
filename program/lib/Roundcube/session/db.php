@@ -185,7 +185,7 @@ class rcube_session_db extends rcube_session
             $this->db->query("UPDATE {$this->table_name} "
                 . "SET `expires_at` = {$expires_at_str}, `vars` = ? WHERE `sess_id` = ?",
                 base64_encode($newvars), $key);
-        } elseif ($this->expires_at - $ts > $this->lifetime / 2) {
+        } elseif ($this->expires_at - $ts < $this->lifetime / 2) {
             $this->db->query("UPDATE {$this->table_name} SET `expires_at` = {$expires_at_str}"
                 . ' WHERE `sess_id` = ?', $key);
         }
